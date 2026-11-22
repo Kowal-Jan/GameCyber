@@ -1,0 +1,145 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scripts/chunks/chunk.gd" id="1_g06cn"]
+[ext_resource type="TileSet" path="res://assets/tiles/arcade_tileset.tres" id="2_6uxn3"]
+[ext_resource type="PackedScene" path="res://scenes/hazards/spike.tscn" id="3_ftgnj"]
+[ext_resource type="Script" path="res://scripts/hazards/spike_hazard.gd" id="4_h1mbc"]
+[ext_resource type="PackedScene" path="res://scenes/hazards/shooter.tscn" id="5_ohe07"]
+[ext_resource type="Script" path="res://scripts/hazards/shooter_hazard.gd" id="6_nyhfu"]
+[ext_resource type="PackedScene" path="res://scenes/hazards/timed_spike.tscn" id="7_ptiex"]
+[ext_resource type="Script" path="res://scripts/hazards/timed_hazard.gd" id="8_1vfmm"]
+
+[node name="Chunk" type="Node2D" unique_id=821015016]
+script = ExtResource("1_g06cn")
+
+[node name="WallsLayer" type="TileMapLayer" parent="." unique_id=535943148]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAEAAAABAAAAAAACAAMAAAACAAAAAAACAAMAAAADAAAAAAACAAMAAAAEAAAAAAACAAMAAAAFAAAAAAAAAAMAAAAHAAAAAAACAAEAAAAIAAAAAAACAAMAAAAJAAAAAAACAAMAAAAKAAAAAAACAAMAAAALAAAAAAACAAMAAAAMAAAAAAAAAAMAAAAAAAEAAAADAAEAAAABAAEAAAADAAIAAAACAAEAAAADAAIAAAADAAEAAAADAAIAAAAEAAEAAAADAAIAAAAFAAEAAAABAAIAAAAHAAEAAAADAAEAAAAIAAEAAAADAAMAAAAJAAEAAAADAAMAAAAKAAEAAAADAAMAAAALAAEAAAADAAMAAAAMAAEAAAABAAMAAAAAAAIAAAABAAEAAAAHAAIAAAADAAEAAAAIAAIAAAADAAMAAAAJAAIAAAADAAMAAAAKAAIAAAADAAMAAAALAAIAAAADAAMAAAAMAAIAAAABAAMAAAAAAAMAAAABAAEAAAACAAMAAAACAAEAAAADAAMAAAAAAAMAAAAHAAMAAAADAAEAAAAIAAMAAAADAAMAAAAJAAMAAAADAAMAAAAKAAMAAAADAAMAAAALAAMAAAADAAMAAAAMAAMAAAABAAMAAAAAAAQAAAABAAEAAAACAAQAAAADAAAAAAADAAQAAAABAAIAAAAFAAQAAAACAAAAAAAGAAQAAAACAAIAAAAHAAQAAAADAAMAAAAIAAQAAAADAAMAAAAJAAQAAAADAAMAAAAKAAQAAAADAAMAAAALAAQAAAADAAMAAAAMAAQAAAABAAMAAAAAAAUAAAABAAEAAAAHAAUAAAADAAAAAAAIAAUAAAADAAIAAAAJAAUAAAADAAMAAAAKAAUAAAADAAIAAAALAAUAAAADAAIAAAAMAAUAAAABAAMAAAAAAAYAAAADAAEAAAABAAYAAAACAAMAAAACAAYAAAACAAMAAAADAAYAAAACAAIAAAAEAAYAAAACAAIAAAAFAAYAAAAAAAIAAAAJAAYAAAABAAAAAAAMAAYAAAABAAEAAAAAAAcAAAADAAEAAAABAAcAAAADAAMAAAACAAcAAAABAAMAAAAMAAcAAAABAAEAAAAAAAgAAAADAAEAAAABAAgAAAADAAMAAAACAAgAAAADAAMAAAADAAgAAAACAAMAAAAEAAgAAAACAAMAAAAFAAgAAAAAAAIAAAAIAAgAAAACAAEAAAAJAAgAAAACAAMAAAAKAAgAAAAAAAMAAAAMAAgAAAABAAEAAAAAAAkAAAADAAEAAAABAAkAAAADAAIAAAACAAkAAAADAAIAAAADAAkAAAADAAIAAAAEAAkAAAABAAIAAAAIAAkAAAADAAEAAAAJAAkAAAADAAMAAAAKAAkAAAABAAMAAAAMAAkAAAABAAEAAAAAAAoAAAABAAEAAAAGAAoAAAACAAEAAAAHAAoAAAACAAMAAAAIAAoAAAADAAMAAAAJAAoAAAADAAMAAAAKAAoAAAABAAMAAAAMAAoAAAABAAEAAAAAAAsAAAABAAEAAAACAAsAAAACAAEAAAADAAsAAAACAAIAAAAEAAsAAAAAAAIAAAAGAAsAAAADAAAAAAAHAAsAAAADAAIAAAAIAAsAAAADAAIAAAAJAAsAAAADAAMAAAAKAAsAAAABAAMAAAAMAAsAAAABAAEAAAAAAAwAAAABAAEAAAACAAwAAAABAAEAAAAJAAwAAAADAAEAAAAKAAwAAAABAAMAAAAMAAwAAAABAAEAAAAAAA0AAAABAAEAAAACAA0AAAABAAAAAAAEAA0AAAACAAAAAAAFAA0AAAACAAIAAAAGAA0AAAACAAIAAAAHAA0AAAAAAAIAAAAJAA0AAAADAAAAAAAKAA0AAAABAAIAAAAMAA0AAAABAAEAAAAAAA4AAAABAAEAAAAMAA4AAAABAAEAAAAAAA8AAAADAAAAAAABAA8AAAACAAIAAAACAA8AAAACAAIAAAADAA8AAAACAAIAAAAEAA8AAAACAAIAAAAFAA8AAAAAAAIAAAAHAA8AAAACAAAAAAAIAA8AAAACAAIAAAAJAA8AAAACAAIAAAAKAA8AAAACAAIAAAALAA8AAAACAAIAAAAMAA8AAAABAAIAAAA=")
+tile_set = ExtResource("2_6uxn3")
+
+[node name="DotsLayer" type="TileMapLayer" parent="." unique_id=1077421348]
+z_index = 1
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAGAAAAAQAAAAAAAAAGAAEAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAABAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAABAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAABAAUAAQAAAAAAAAACAAUAAQAAAAAAAAADAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAALAAYAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAHAAcAAQAAAAAAAAAIAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAKAAcAAQAAAAAAAAALAAcAAQAAAAAAAAAGAAgAAQAAAAAAAAAHAAgAAQAAAAAAAAALAAgAAQAAAAAAAAAFAAkAAQAAAAAAAAAGAAkAAQAAAAAAAAAHAAkAAQAAAAAAAAALAAkAAQAAAAAAAAABAAoAAQAAAAAAAAACAAoAAQAAAAAAAAADAAoAAQAAAAAAAAAEAAoAAQAAAAAAAAAFAAoAAQAAAAAAAAALAAoAAQAAAAAAAAABAAsAAQAAAAAAAAAFAAsAAQAAAAAAAAALAAsAAQAAAAAAAAABAAwAAQAAAAAAAAADAAwAAQAAAAAAAAAEAAwAAQAAAAAAAAAFAAwAAQAAAAAAAAAGAAwAAQAAAAAAAAAHAAwAAQAAAAAAAAAIAAwAAQAAAAAAAAALAAwAAQAAAAAAAAABAA0AAQAAAAAAAAADAA0AAQAAAAAAAAAIAA0AAQAAAAAAAAALAA0AAQAAAAAAAAABAA4AAQAAAAAAAAACAA4AAQAAAAAAAAADAA4AAQAAAAAAAAAEAA4AAQAAAAAAAAAFAA4AAQAAAAAAAAAGAA4AAQAAAAAAAAAHAA4AAQAAAAAAAAAIAA4AAQAAAAAAAAAJAA4AAQABAAAAAAAKAA4AAQAAAAAAAAALAA4AAQAAAAAAAAAGAA8AAQAAAAAAAAA=")
+tile_set = ExtResource("2_6uxn3")
+
+[node name="Hazards" type="Node2D" parent="." unique_id=2041210063]
+z_index = 2
+
+[node name="Spike_5_0" type="Node2D" parent="Hazards" unique_id=505761992 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(88, 8)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(5, 0)
+direction = Vector2i(1, 0)
+
+[node name="Spike_7_0" type="Node2D" parent="Hazards" unique_id=1248245254 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(120, 8)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(7, 0)
+direction = Vector2i(-1, 0)
+
+[node name="Shooter_0_2" type="Node2D" parent="Hazards" unique_id=519999362 instance=ExtResource("5_ohe07")]
+z_index = 2
+position = Vector2(8, 40)
+script = ExtResource("6_nyhfu")
+tile = Vector2i(0, 2)
+direction = Vector2i(1, 0)
+
+[node name="Spike_8_5" type="Node2D" parent="Hazards" unique_id=48485274 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(136, 88)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(8, 5)
+
+[node name="Spike_9_5" type="Node2D" parent="Hazards" unique_id=1124108260 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(152, 88)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(9, 5)
+
+[node name="Spike_3_6" type="Node2D" parent="Hazards" unique_id=841626635 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(56, 104)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(3, 6)
+
+[node name="Spike_3_8" type="Node2D" parent="Hazards" unique_id=170662282 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(56, 136)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(3, 8)
+direction = Vector2i(0, -1)
+
+[node name="Spike_8_8" type="Node2D" parent="Hazards" unique_id=2140261502 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(136, 136)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(8, 8)
+direction = Vector2i(0, -1)
+
+[node name="Spike_10_8" type="Node2D" parent="Hazards" unique_id=385832846 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(168, 136)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(10, 8)
+direction = Vector2i(1, 0)
+
+[node name="Spike_2_9" type="Node2D" parent="Hazards" unique_id=943957378 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(40, 152)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(2, 9)
+
+[node name="Spike_4_9" type="Node2D" parent="Hazards" unique_id=976652199 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(72, 152)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(4, 9)
+
+[node name="Shooter_12_10" type="Node2D" parent="Hazards" unique_id=1455307259 instance=ExtResource("5_ohe07")]
+z_index = 2
+position = Vector2(200, 168)
+script = ExtResource("6_nyhfu")
+tile = Vector2i(12, 10)
+
+[node name="Spike_10_12" type="Node2D" parent="Hazards" unique_id=160932881 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(168, 200)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(10, 12)
+direction = Vector2i(1, 0)
+
+[node name="Spike_10_13" type="Node2D" parent="Hazards" unique_id=403488917 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(168, 216)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(10, 13)
+direction = Vector2i(1, 0)
+
+[node name="TimedSpike_11_14" type="Node2D" parent="Hazards" unique_id=1747128161 instance=ExtResource("7_ptiex")]
+z_index = 2
+position = Vector2(184, 232)
+script = ExtResource("8_1vfmm")
+tile = Vector2i(11, 14)
+
+[node name="Spike_5_15" type="Node2D" parent="Hazards" unique_id=558722481 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(88, 248)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(5, 15)
+direction = Vector2i(1, 0)
+
+[node name="Spike_7_15" type="Node2D" parent="Hazards" unique_id=1710154551 instance=ExtResource("3_ftgnj")]
+z_index = 2
+position = Vector2(120, 248)
+script = ExtResource("4_h1mbc")
+tile = Vector2i(7, 15)
+direction = Vector2i(-1, 0)
+
+[node name="EntryMarker" type="Marker2D" parent="." unique_id=1325710361]
+position = Vector2(104, 248)
+
+[node name="ExitMarker" type="Marker2D" parent="." unique_id=1317859678]
+position = Vector2(104, 8)

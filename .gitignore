@@ -1,0 +1,8 @@
+.godot/
+*.translation
+.import/
+*.tmp
+export.cfg
+shot.png
+android/
+.mono/
