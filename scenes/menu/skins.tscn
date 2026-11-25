@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://vsb8a3pfkeu7"]
+
+[ext_resource type="Texture2D" uid="uid://b57co0h3ev47o" path="res://assets/levels/slot_normal.png" id="1_ofi2f"]
+[ext_resource type="Texture2D" uid="uid://lvoi4wy8eaym" path="res://assets/sprites/player.png" id="2_oi22j"]
+
+[node name="Skins" type="Node2D" unique_id=856899178]
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=2108410955]
+offset_left = 17.0
+offset_top = 20.0
+offset_right = 37.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton" unique_id=1206788313]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = ExtResource("2_oi22j")
+
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=213969767]
+offset_left = 59.0
+offset_top = 20.0
+offset_right = 79.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton3" type="TextureButton" parent="." unique_id=1433028449]
+offset_left = 136.0
+offset_top = 20.0
+offset_right = 156.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton4" type="TextureButton" parent="." unique_id=1572121893]
+offset_left = 97.0
+offset_top = 20.0
+offset_right = 117.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton5" type="TextureButton" parent="." unique_id=1318884106]
+offset_left = 17.0
+offset_top = 56.0
+offset_right = 37.0
+offset_bottom = 76.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton6" type="TextureButton" parent="." unique_id=192615097]
+offset_left = 59.0
+offset_top = 56.0
+offset_right = 79.0
+offset_bottom = 76.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton7" type="TextureButton" parent="." unique_id=1438974968]
+offset_left = 97.0
+offset_top = 56.0
+offset_right = 117.0
+offset_bottom = 76.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton8" type="TextureButton" parent="." unique_id=1137507796]
+offset_left = 136.0
+offset_top = 56.0
+offset_right = 156.0
+offset_bottom = 76.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton9" type="TextureButton" parent="." unique_id=760197854]
+offset_left = 17.0
+offset_top = 94.0
+offset_right = 37.0
+offset_bottom = 114.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton10" type="TextureButton" parent="." unique_id=1490974471]
+offset_left = 59.0
+offset_top = 94.0
+offset_right = 79.0
+offset_bottom = 114.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton11" type="TextureButton" parent="." unique_id=691913896]
+offset_left = 97.0
+offset_top = 94.0
+offset_right = 117.0
+offset_bottom = 114.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton12" type="TextureButton" parent="." unique_id=438155765]
+offset_left = 136.0
+offset_top = 94.0
+offset_right = 156.0
+offset_bottom = 114.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton13" type="TextureButton" parent="." unique_id=1937218680]
+offset_left = 169.0
+offset_top = 20.0
+offset_right = 189.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton14" type="TextureButton" parent="." unique_id=173560908]
+offset_left = 169.0
+offset_top = 56.0
+offset_right = 189.0
+offset_bottom = 76.0
+texture_normal = ExtResource("1_ofi2f")
+
+[node name="TextureButton15" type="TextureButton" parent="." unique_id=448739043]
+offset_left = 169.0
+offset_top = 94.0
+offset_right = 189.0
+offset_bottom = 114.0
+texture_normal = ExtResource("1_ofi2f")

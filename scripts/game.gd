@@ -111,6 +111,13 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_exit_to_menu()
+		return
+	if not alive:
+		if Time.get_ticks_msec() >= restart_at and _is_confirm(event):
+			_restart()
+		return
 	if not alive:
 		if Time.get_ticks_msec() >= restart_at and _is_confirm(event):
 			_restart()
@@ -587,6 +594,15 @@ func _restart() -> void:
 		return
 	restarting = true
 	get_tree().reload_current_scene()
+	
+func _exit_to_menu() -> void:
+	if restarting:
+		return
+	restarting = true
+	if score > best:
+		best = score
+		_save_best()
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 
 func _grid_to_world(cell: Vector2i) -> Vector2:

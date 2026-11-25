@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://b1ttufgl20xq8"]
+
+[ext_resource type="Texture2D" uid="uid://dlof48h2fgfmx" path="res://assets/menu/button_wide_cyan_normal.png" id="1_g3eks"]
+[ext_resource type="Script" uid="uid://7kym8ewxpxn6" path="res://scripts/menu/menu.gd" id="1_v86rl"]
+[ext_resource type="Texture2D" uid="uid://dh55l2k0e1lyq" path="res://assets/menu/button_wide_cyan_pressed.png" id="2_v86rl"]
+[ext_resource type="Texture2D" uid="uid://ba1tdpgepjb5w" path="res://assets/menu/button_wide_cyan_hover.png" id="3_13sgg"]
+[ext_resource type="Texture2D" uid="uid://0pdduxjpjwc0" path="res://assets/menu/button_wide_cyan_disabled.png" id="4_i6lef"]
+[ext_resource type="Script" uid="uid://b8slylq3rcswd" path="res://scripts/menu/MunuPlay.gd" id="6_v86rl"]
+[ext_resource type="Script" uid="uid://dn4cwybw1atwo" path="res://scripts/menu/menuQuit.gd" id="7_13sgg"]
+[ext_resource type="Script" uid="uid://cihu313cfbbif" path="res://scripts/menu/toLevels.gd" id="8_13sgg"]
+[ext_resource type="Script" uid="uid://csu2y6fukdxw5" path="res://scripts/menu/toSkins.gd" id="9_i6lef"]
+[ext_resource type="Texture2D" uid="uid://c4oqwlboukq65" path="res://assets/menu/untitled.png" id="10_70i5f"]
+
+[node name="Menu" type="Node2D" unique_id=1530633839]
+position = Vector2(2, 0)
+script = ExtResource("1_v86rl")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=26127505]
+offset_left = 57.0
+offset_top = 137.0
+offset_right = 153.0
+offset_bottom = 177.0
+texture_normal = ExtResource("1_g3eks")
+texture_pressed = ExtResource("2_v86rl")
+texture_hover = ExtResource("3_13sgg")
+texture_disabled = ExtResource("4_i6lef")
+script = ExtResource("6_v86rl")
+
+[node name="Label" type="Label" parent="TextureButton" unique_id=865828193]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 13
+text = "Play"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=671532730]
+offset_left = 58.0
+offset_top = 253.0
+offset_right = 154.0
+offset_bottom = 293.0
+texture_normal = ExtResource("1_g3eks")
+texture_pressed = ExtResource("2_v86rl")
+texture_hover = ExtResource("3_13sgg")
+texture_disabled = ExtResource("4_i6lef")
+script = ExtResource("7_13sgg")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton2" unique_id=1166215804]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020833334
+anchor_top = -0.025
+anchor_right = 0.020833334
+anchor_bottom = -0.025
+offset_left = 33.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 13
+text = "Quit"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton3" type="TextureButton" parent="." unique_id=355442741]
+offset_left = 58.0
+offset_top = 179.0
+offset_right = 154.0
+offset_bottom = 219.0
+texture_normal = ExtResource("1_g3eks")
+texture_pressed = ExtResource("2_v86rl")
+texture_hover = ExtResource("3_13sgg")
+texture_disabled = ExtResource("4_i6lef")
+script = ExtResource("8_13sgg")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton3" unique_id=1304859661]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.041666668
+anchor_top = -0.025
+anchor_right = -0.041666668
+anchor_bottom = -0.025
+offset_left = 33.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 13
+text = "Levels"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton4" type="TextureButton" parent="." unique_id=1069517112]
+offset_left = 59.0
+offset_top = 215.0
+offset_right = 155.0
+offset_bottom = 255.0
+texture_normal = ExtResource("1_g3eks")
+texture_pressed = ExtResource("2_v86rl")
+texture_hover = ExtResource("3_13sgg")
+texture_disabled = ExtResource("4_i6lef")
+script = ExtResource("9_i6lef")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton4" unique_id=158566373]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.041666668
+anchor_top = -0.025
+anchor_right = -0.041666668
+anchor_bottom = -0.025
+offset_left = 33.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 13
+text = "Skins"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=1606376896]
+offset_left = 82.0
+offset_top = 75.0
+offset_right = 127.0
+offset_bottom = 98.0
+text = "Tomb"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1074291191]
+z_index = -1
+offset_left = -39.0
+offset_top = -1.0
+offset_right = 249.0
+offset_bottom = 383.0
+mouse_filter = 2
+texture = ExtResource("10_70i5f")
+stretch_mode = 6
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="TextureButton3" to="." method="_on_texture_button_3_pressed"]
+[connection signal="pressed" from="TextureButton4" to="." method="_on_texture_button_3_pressed"]

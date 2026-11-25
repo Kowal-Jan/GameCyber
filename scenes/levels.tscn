@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://dcotop35il53a"]
+
+[ext_resource type="Texture2D" uid="uid://b5k2g5adalrqc" path="res://assets/levels/frame_hud_magenta.png" id="1_hk6qi"]
+[ext_resource type="Shader" uid="uid://bmf47kmvw47la" path="res://shaders/levels/new_shader.gdshader" id="2_5ekxl"]
+[ext_resource type="Texture2D" uid="uid://n6s1qf1cpbxc" path="res://assets/levels/frame_panel_cyan.png" id="2_ly2og"]
+[ext_resource type="Texture2D" uid="uid://b57co0h3ev47o" path="res://assets/levels/slot_normal.png" id="4_jj4e6"]
+[ext_resource type="Texture2D" uid="uid://c3miua0n5cnr3" path="res://assets/menu/untitled(1).png" id="5_jj4e6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7mfn"]
+shader = ExtResource("2_5ekxl")
+shader_parameter/rect_size = Vector2(208, 384)
+shader_parameter/left_color = Color(0.239, 0.941, 1, 1)
+shader_parameter/right_color = Color(1, 0.239, 0.604, 1)
+shader_parameter/band_px = 16.0
+shader_parameter/edge_px = 2.0
+shader_parameter/glow_px = 24.0
+shader_parameter/steps = 6.0
+shader_parameter/flow_speed = 40.0
+shader_parameter/flow_len = 28.0
+
+[node name="Levels" type="Node2D" unique_id=1160632806]
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=630331268]
+offset_left = 107.0
+offset_top = 253.0
+offset_right = 139.0
+offset_bottom = 285.0
+texture_normal = ExtResource("1_hk6qi")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton" unique_id=170486354]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 26.0
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton4" type="TextureButton" parent="." unique_id=935827101]
+offset_left = 39.0
+offset_top = 127.0
+offset_right = 71.0
+offset_bottom = 159.0
+texture_normal = ExtResource("1_hk6qi")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton4" unique_id=1491193832]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 20.0
+offset_bottom = 26.0
+text = "4"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton6" type="TextureButton" parent="." unique_id=945676208]
+offset_left = 113.0
+offset_top = 54.0
+offset_right = 145.0
+offset_bottom = 86.0
+texture_normal = ExtResource("1_hk6qi")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton6" unique_id=687747936]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 21.0
+offset_bottom = 26.0
+text = "6"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=23628482]
+offset_left = 107.0
+offset_top = 182.0
+offset_right = 139.0
+offset_bottom = 214.0
+texture_normal = ExtResource("2_ly2og")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton2" unique_id=555511665]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 24.0
+offset_bottom = 27.0
+text = "2"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton5" type="TextureButton" parent="." unique_id=1939892394]
+offset_left = 111.0
+offset_top = 125.0
+offset_right = 143.0
+offset_bottom = 157.0
+texture_normal = ExtResource("2_ly2og")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton5" unique_id=1655790137]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 21.0
+offset_bottom = 26.0
+text = "5"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton3" type="TextureButton" parent="." unique_id=915478175]
+offset_left = 37.0
+offset_top = 182.0
+offset_right = 69.0
+offset_bottom = 214.0
+texture_normal = ExtResource("2_ly2og")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TextureButton3" unique_id=1590953299]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 27.0
+text = "3"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1142725472]
+material = SubResource("ShaderMaterial_n7mfn")
+offset_left = 113.0
+offset_top = 214.0
+offset_right = 133.0
+offset_bottom = 254.0
+texture = ExtResource("4_jj4e6")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect5" type="TextureRect" parent="." unique_id=2001341085]
+material = SubResource("ShaderMaterial_n7mfn")
+offset_left = 119.0
+offset_top = 86.0
+offset_right = 139.0
+offset_bottom = 126.0
+texture = ExtResource("4_jj4e6")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=693016783]
+material = SubResource("ShaderMaterial_n7mfn")
+offset_left = 109.0
+offset_top = 189.0
+offset_right = 129.0
+offset_bottom = 229.0
+rotation = 1.5707964
+texture = ExtResource("4_jj4e6")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=497539398]
+material = SubResource("ShaderMaterial_n7mfn")
+offset_left = 111.0
+offset_top = 133.0
+offset_right = 131.0
+offset_bottom = 173.0
+rotation = 1.5707964
+texture = ExtResource("4_jj4e6")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1155195782]
+material = SubResource("ShaderMaterial_n7mfn")
+offset_left = 45.0
+offset_top = 159.0
+offset_right = 65.0
+offset_bottom = 183.0
+texture = ExtResource("4_jj4e6")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect6" type="TextureRect" parent="." unique_id=870598335]
+z_index = -1
+offset_left = -5.0
+offset_top = -358.0
+offset_right = 210.0
+offset_bottom = 384.0
+mouse_filter = 2
+texture = ExtResource("5_jj4e6")
