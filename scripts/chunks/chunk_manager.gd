@@ -15,7 +15,7 @@ func setup(host_game) -> void:
 	game = host_game
 	_load_library()
 	if library.is_empty():
-		push_error("Нет чанков в res://scenes/chunks. Открой scenes/tools/chunk_baker.tscn и нажми Bake All Chunks.")
+		push_error("Нет чанков в res://scenes/chunks.")
 		return
 	_refill_bag()
 	# Вход первого чанка. Под ним нет пола, поэтому игрок сразу упирается в стену.
@@ -76,6 +76,9 @@ func _load_library() -> void:
 	names.sort()
 	for file_name in names:
 		if not file_name.ends_with(".tscn"):
+			continue
+		# Старые запечённые шаблоны. Если вкладка ещё открыта, Godot записывает файл обратно при запуске.
+		if file_name.substr(0, 8) in ["chunk_01", "chunk_02", "chunk_03", "chunk_04", "chunk_05", "chunk_06"]:
 			continue
 		var packed := load(CHUNK_DIR + "/" + file_name) as PackedScene
 		if packed != null:

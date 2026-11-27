@@ -1,9 +1,12 @@
 extends Node2D
 ## Один запечённый кусок уровня. Клетки локальные, мир считает ChunkManager.
 
+const COLS := 13
+
 var game
 var origin := Vector2i.ZERO
 var dot_cells: Dictionary = {}
+var floor_cells: Dictionary = {}
 var spike_cells: Array[Vector2i] = []
 var shooter_cells: Array[Vector2i] = []
 var timed_cells: Array[Vector2i] = []
@@ -15,20 +18,37 @@ func activate(host_game, world_origin: Vector2i) -> void:
 	game = host_game
 	origin = world_origin
 	dot_cells.clear()
+	floor_cells.clear()
 	spike_cells.clear()
 	shooter_cells.clear()
 	timed_cells.clear()
+	var walls: TileMapLayer = $WallsLayer
 	var dots: TileMapLayer = $DotsLayer
+	var entry_local := _marker_cell($EntryMarker)
+	var exit_local := _marker_cell($ExitMarker)
+	var y0 := mini(entry_local.y, exit_local.y)
+	var y1 := maxi(entry_local.y, exit_local.y)
+	for y in range(y0, y1 + 1):
+		for x in COLS:
+			var cell := Vector2i(x, y)
+			if walls.get_cell_source_id(cell) != -1:
+				continue
+			var world := origin + cell
+			game.carved[world] = 0
+			floor_cells[world] = true
 	for cell in dots.get_used_cells():
+		if walls.get_cell_source_id(cell) != -1:
+			continue
 		var world: Vector2i = origin + cell
 		var atlas := dots.get_cell_atlas_coords(cell)
 		game.carved[world] = 2 if atlas == Vector2i(1, 0) else 1
 		dot_cells[world] = cell
+		floor_cells[world] = true
 	for child in $Hazards.get_children():
 		if child.has_method("register"):
 			child.register(self, origin)
-	entry_cell = origin + _marker_cell($EntryMarker)
-	exit_cell = origin + _marker_cell($ExitMarker)
+	entry_cell = origin + entry_local
+	exit_cell = origin + exit_local
 
 
 func take_dot(world_cell: Vector2i) -> void:
@@ -42,7 +62,7 @@ func take_dot(world_cell: Vector2i) -> void:
 func release() -> void:
 	if game == null:
 		return
-	for world in dot_cells.keys():
+	for world in floor_cells.keys():
 		game.carved.erase(world)
 		game.trail.erase(world)
 	for world in spike_cells:

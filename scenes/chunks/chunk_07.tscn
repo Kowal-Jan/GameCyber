@@ -1,9 +1,8 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://c7mfnodw35ak3"]
 
-[ext_resource type="Script" path="res://scripts/chunks/chunk.gd" id="1_dpfv0"]
-[ext_resource type="TileSet" path="res://assets/tiles/draft_tileset.tres" id="2_u23x2"]
+[ext_resource type="Script" uid="uid://bysy3u7lrarun" path="res://scripts/chunks/chunk.gd" id="1_dpfv0"]
+[ext_resource type="TileSet" uid="uid://px88no5fjv5i" path="res://assets/tiles/draft_tileset.tres" id="2_u23x2"]
 [ext_resource type="PackedScene" path="res://scenes/hazards/spike.tscn" id="3_6drvb"]
-[ext_resource type="Script" path="res://scripts/hazards/spike_hazard.gd" id="4_qh4qr"]
 
 [node name="Chunk" type="Node2D" unique_id=1930391712]
 script = ExtResource("1_dpfv0")
@@ -22,24 +21,18 @@ tile_set = ExtResource("2_u23x2")
 [node name="Hazards" type="Node2D" parent="." unique_id=1214239183]
 z_index = 2
 
-[node name="Spike" type="Node2D" parent="Hazards" unique_id=551729671 instance=ExtResource("3_6drvb")]
-z_index = 2
+[node name="Spike" parent="Hazards" unique_id=551729671 instance=ExtResource("3_6drvb")]
 position = Vector2(56, 152)
-script = ExtResource("4_qh4qr")
 tile = Vector2i(3, 9)
 direction = Vector2i(0, -1)
 
-[node name="Spike2" type="Node2D" parent="Hazards" unique_id=133756478 instance=ExtResource("3_6drvb")]
-z_index = 2
+[node name="Spike2" parent="Hazards" unique_id=133756478 instance=ExtResource("3_6drvb")]
 position = Vector2(24, 152)
-script = ExtResource("4_qh4qr")
 tile = Vector2i(1, 9)
 direction = Vector2i(0, -1)
 
-[node name="Spike3" type="Node2D" parent="Hazards" unique_id=1573757312 instance=ExtResource("3_6drvb")]
-z_index = 2
+[node name="Spike3" parent="Hazards" unique_id=1573757312 instance=ExtResource("3_6drvb")]
 position = Vector2(40, 152)
-script = ExtResource("4_qh4qr")
 tile = Vector2i(2, 9)
 direction = Vector2i(0, -1)
 

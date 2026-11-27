@@ -118,11 +118,11 @@ text = "Skins"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="." unique_id=1606376896]
-offset_left = 82.0
+offset_left = 60.0
 offset_top = 75.0
-offset_right = 127.0
+offset_right = 148.00012
 offset_bottom = 98.0
-text = "Tomb"
+text = "Cybergame"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1074291191]
 z_index = -1

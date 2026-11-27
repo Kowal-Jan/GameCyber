@@ -51,10 +51,11 @@ var restarting := false
 var run_seed := 0
 var trap_cell := Vector2i(-999, -999)
 var trap_until := 0
-var anchor_x := 2
-var anchor_on_left := true
-var next_bottom := 0
-var box_index := 0
+# Автогенерация коробок выключена. Уровень собирает только ChunkManager.
+# var anchor_x := 2
+# var anchor_on_left := true
+# var next_bottom := 0
+# var box_index := 0
 
 @onready var world: Node2D = $World
 var chunks
@@ -115,12 +116,9 @@ func _input(event: InputEvent) -> void:
 		_exit_to_menu()
 		return
 	if not alive:
-		if Time.get_ticks_msec() >= restart_at and _is_confirm(event):
-			_restart()
-		return
-	if not alive:
-		if Time.get_ticks_msec() >= restart_at and _is_confirm(event):
-			_restart()
+		if Time.get_ticks_msec() >= restart_at and event is InputEventKey and event.pressed and not event.echo:
+			if event.keycode in [KEY_SPACE, KEY_ENTER, KEY_KP_ENTER, KEY_R]:
+				_restart()
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key_dir := _dir_from_key(event.keycode)
@@ -151,89 +149,91 @@ func _extend_to(target_y: int) -> void:
 	chunks.ensure_above(target_y)
 
 
-func _add_box() -> void:
-	var y := next_bottom
-	var left := 1
-	var right := COLS - 2
-	var entry_x := left if anchor_on_left else right
-	var exit_x := right if anchor_on_left else left
-	for x in range(left, right + 1):
-		var cell := Vector2i(x, y)
-		_carve(cell)
-		_maybe_dot(cell)
-	if box_index % 4 == 3:
-		var star := Vector2i(left + (right - left) / 2, y)
-		if star != player and carved.has(star):
-			carved[star] = 2
-	for step in range(1, 4):
-		var shaft := Vector2i(exit_x, y - step)
-		_carve(shaft)
-		_maybe_dot(shaft)
-	var pocket_width := 0
-	if box_index % 2 == 0:
-		pocket_width = 2 + (box_index % 3)
-		_add_pocket(exit_x, y, pocket_width)
-	for x in range(left + 4, right - 3):
-		_add_spike(Vector2i(x, y - 1), Vector2i.DOWN)
-		_add_spike(Vector2i(x, y + 1), Vector2i.UP)
-	if box_index > 1 and box_index % 5 == 0:
-		var from_left := entry_x == left
-		shooters.append({
-			"cell": Vector2i(0 if from_left else COLS - 1, y),
-			"dir": Vector2i.RIGHT if from_left else Vector2i.LEFT,
-			"wait": randf_range(0.9, 1.6),
-			"interval": randf_range(1.7, 2.3),
-		})
-	elif pocket_width == 0 and box_index % 3 == 2:
-		var gate := Vector2i(exit_x, y)
-		if gate != player:
-			timed_cells[gate] = true
-	head = Vector2i(exit_x, y)
-	next_bottom = y - 4
-	anchor_x = exit_x
-	anchor_on_left = exit_x == left
-	box_index += 1
-
-
-func _add_pocket(anchor: int, y: int, width: int) -> void:
-	var inward := -1 if anchor > COLS / 2 else 1
-	var coords: Array[Vector2i] = []
-	coords.append(Vector2i(anchor, y + 1))
-	coords.append(Vector2i(anchor + inward, y + 1))
-	coords.append(Vector2i(anchor + inward, y + 2))
-	if width >= 3:
-		coords.append(Vector2i(anchor + inward * 2, y + 2))
-	if width >= 4:
-		coords.append(Vector2i(anchor + inward * 3, y + 2))
-	for cell in coords:
-		if not _in_playable(cell):
-			return
-	for cell in coords:
-		_carve(cell)
-		_maybe_dot(cell)
-
-
-func _maybe_dot(cell: Vector2i) -> void:
-	if cell == player or not carved.has(cell):
-		return
-	if int(carved[cell]) != 0:
-		return
-	carved[cell] = 1
-
-
-func _add_spike(cell: Vector2i, danger: Vector2i) -> void:
-	if cell == player + Vector2i.UP or cell == player + Vector2i.DOWN:
-		return
-	if not _in_playable(cell) or carved.has(cell) or spike_walls.has(cell):
-		return
-	spike_walls[cell] = danger
-
-
-func _carve(cell: Vector2i) -> void:
-	if not _in_playable(cell) or spike_walls.has(cell):
-		return
-	if not carved.has(cell):
-		carved[cell] = 0
+# Процедурная генерация коробок, карманов, точек и шипов.
+# Раньше дописывала клетки в carved поверх уже поставленных чанков.
+# func _add_box() -> void:
+# 	var y := next_bottom
+# 	var left := 1
+# 	var right := COLS - 2
+# 	var entry_x := left if anchor_on_left else right
+# 	var exit_x := right if anchor_on_left else left
+# 	for x in range(left, right + 1):
+# 		var cell := Vector2i(x, y)
+# 		_carve(cell)
+# 		_maybe_dot(cell)
+# 	if box_index % 4 == 3:
+# 		var star := Vector2i(left + (right - left) / 2, y)
+# 		if star != player and carved.has(star):
+# 			carved[star] = 2
+# 	for step in range(1, 4):
+# 		var shaft := Vector2i(exit_x, y - step)
+# 		_carve(shaft)
+# 		_maybe_dot(shaft)
+# 	var pocket_width := 0
+# 	if box_index % 2 == 0:
+# 		pocket_width = 2 + (box_index % 3)
+# 		_add_pocket(exit_x, y, pocket_width)
+# 	for x in range(left + 4, right - 3):
+# 		_add_spike(Vector2i(x, y - 1), Vector2i.DOWN)
+# 		_add_spike(Vector2i(x, y + 1), Vector2i.UP)
+# 	if box_index > 1 and box_index % 5 == 0:
+# 		var from_left := entry_x == left
+# 		shooters.append({
+# 			"cell": Vector2i(0 if from_left else COLS - 1, y),
+# 			"dir": Vector2i.RIGHT if from_left else Vector2i.LEFT,
+# 			"wait": randf_range(0.9, 1.6),
+# 			"interval": randf_range(1.7, 2.3),
+# 		})
+# 	elif pocket_width == 0 and box_index % 3 == 2:
+# 		var gate := Vector2i(exit_x, y)
+# 		if gate != player:
+# 			timed_cells[gate] = true
+# 	head = Vector2i(exit_x, y)
+# 	next_bottom = y - 4
+# 	anchor_x = exit_x
+# 	anchor_on_left = exit_x == left
+# 	box_index += 1
+#
+#
+# func _add_pocket(anchor: int, y: int, width: int) -> void:
+# 	var inward := -1 if anchor > COLS / 2 else 1
+# 	var coords: Array[Vector2i] = []
+# 	coords.append(Vector2i(anchor, y + 1))
+# 	coords.append(Vector2i(anchor + inward, y + 1))
+# 	coords.append(Vector2i(anchor + inward, y + 2))
+# 	if width >= 3:
+# 		coords.append(Vector2i(anchor + inward * 2, y + 2))
+# 	if width >= 4:
+# 		coords.append(Vector2i(anchor + inward * 3, y + 2))
+# 	for cell in coords:
+# 		if not _in_playable(cell):
+# 			return
+# 	for cell in coords:
+# 		_carve(cell)
+# 		_maybe_dot(cell)
+#
+#
+# func _maybe_dot(cell: Vector2i) -> void:
+# 	if cell == player or not carved.has(cell):
+# 		return
+# 	if int(carved[cell]) != 0:
+# 		return
+# 	carved[cell] = 1
+#
+#
+# func _add_spike(cell: Vector2i, danger: Vector2i) -> void:
+# 	if cell == player + Vector2i.UP or cell == player + Vector2i.DOWN:
+# 		return
+# 	if not _in_playable(cell) or carved.has(cell) or spike_walls.has(cell):
+# 		return
+# 	spike_walls[cell] = danger
+#
+#
+# func _carve(cell: Vector2i) -> void:
+# 	if not _in_playable(cell) or spike_walls.has(cell):
+# 		return
+# 	if not carved.has(cell):
+# 		carved[cell] = 0
 
 
 func _in_playable(cell: Vector2i) -> bool:
@@ -241,7 +241,7 @@ func _in_playable(cell: Vector2i) -> bool:
 
 
 func _is_blocked(cell: Vector2i) -> bool:
-	if not _in_playable(cell):
+	if cell.x < 0 or cell.x >= COLS:
 		return true
 	return not carved.has(cell)
 
@@ -249,13 +249,15 @@ func _is_blocked(cell: Vector2i) -> bool:
 func _spike_kills(cell: Vector2i, move_dir: Vector2i) -> bool:
 	if not spike_walls.has(cell):
 		return false
-	var danger: Vector2i = spike_walls[cell]
-	return Vector2(move_dir).dot(Vector2(danger)) < -0.7
+	for danger in spike_walls[cell]:
+		if Vector2(move_dir).dot(Vector2(danger)) < -0.7:
+			return true
+	return false
 
 
 func _touches_wall() -> bool:
 	for dir in DIRS:
-		if _is_blocked(player + dir) or spike_walls.has(player + dir):
+		if _is_blocked(player + dir):
 			return true
 	return false
 
@@ -312,12 +314,12 @@ func _dump_level() -> void:
 				line += "H"
 			elif timed_cells.has(cell):
 				line += "t"
+			elif spike_walls.has(cell):
+				line += "^"
 			elif int(carved.get(cell, 0)) == 2:
 				line += "*"
 			elif carved.has(cell):
 				line += "."
-			elif spike_walls.has(cell):
-				line += "^"
 			elif _shooter_cell(cell):
 				line += "S"
 			else:
@@ -728,7 +730,48 @@ func _build_ui() -> void:
 	box.add_child(_make_label("SIGNAL LOST", 16, MAGENTA))
 	death_score = _make_label("00000", 14, GOLD)
 	box.add_child(death_score)
-	box.add_child(_make_label("TAP TO REBOOT", 8, CYAN))
+	var actions := HBoxContainer.new()
+	actions.alignment = BoxContainer.ALIGNMENT_CENTER
+	actions.add_theme_constant_override("separation", 8)
+	actions.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(actions)
+	var retry := _make_button("Retry", CYAN)
+	retry.pressed.connect(_restart)
+	actions.add_child(retry)
+	var menu := _make_button("Menu", MAGENTA)
+	menu.pressed.connect(_exit_to_menu)
+	actions.add_child(menu)
+
+
+func _make_button(text: String, color: Color) -> Button:
+	var button := Button.new()
+	button.text = text
+	button.focus_mode = Control.FOCUS_NONE
+	button.custom_minimum_size = Vector2(72, 22)
+	button.add_theme_font_size_override("font_size", 10)
+	button.add_theme_color_override("font_color", color)
+	button.add_theme_color_override("font_hover_color", color)
+	button.add_theme_color_override("font_pressed_color", INK)
+	var normal := _button_style(Color(0.03, 0.02, 0.08, 0.95), color)
+	var hover := _button_style(color.darkened(0.55), color)
+	var pressed := _button_style(color, INK)
+	button.add_theme_stylebox_override("normal", normal)
+	button.add_theme_stylebox_override("hover", hover)
+	button.add_theme_stylebox_override("pressed", pressed)
+	button.add_theme_stylebox_override("focus", normal)
+	return button
+
+
+func _button_style(fill: Color, border: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = fill
+	style.border_color = border
+	style.set_border_width_all(1)
+	style.content_margin_left = 6
+	style.content_margin_right = 6
+	style.content_margin_top = 2
+	style.content_margin_bottom = 2
+	return style
 
 
 func _make_label(text: String, size: int, color: Color) -> Label:

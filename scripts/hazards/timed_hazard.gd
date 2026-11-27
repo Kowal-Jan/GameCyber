@@ -4,15 +4,32 @@ extends Node2D
 
 const COLOR := Color("ffb03a")
 
+const TILE := 16
+
 @export var tile := Vector2i.ZERO:
 	set(value):
 		tile = value
-		position = Vector2(value.x * 16 + 8, value.y * 16 + 8)
 		queue_redraw()
 
 
 func _ready() -> void:
+	set_notify_transform(true)
+	_adopt_position()
 	queue_redraw()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSFORM_CHANGED:
+		_adopt_position()
+
+
+func _adopt_position() -> void:
+	var cell := Vector2i(floori(position.x / float(TILE)), floori(position.y / float(TILE)))
+	var snapped := Vector2(cell.x * TILE + 8, cell.y * TILE + 8)
+	if position.distance_squared_to(snapped) > 0.1:
+		position = snapped
+	if cell != tile:
+		tile = cell
 
 
 func _draw() -> void:
@@ -23,6 +40,7 @@ func _draw() -> void:
 
 
 func register(host, origin: Vector2i) -> void:
+	_adopt_position()
 	var world := origin + tile
 	host.game.timed_cells[world] = true
 	host.timed_cells.append(world)

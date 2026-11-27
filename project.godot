@@ -13,7 +13,7 @@ config_version=5
 config/name="GameTomb"
 config/description="Пиксельный киберпанк-клон с бесконечным забегом вверх."
 config/version="0.2.0"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="uid://b1ttufgl20xq8"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [display]
